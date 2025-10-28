@@ -1,1 +1,1 @@
-# ai-legal-compliance-assistant
+# NYC-legal-alcoholsale-compliance-assistant
