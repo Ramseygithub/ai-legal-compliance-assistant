@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Legal Compliance Assistant System - Admin</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>AI Legal Compliance Assistant System</h1>
+            <p class="subtitle">Document Management & System Administration</p>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="tab-button active" data-tab="upload">Document Upload</button>
+            <button class="tab-button" data-tab="knowledge">Knowledge Graph</button>
+            <button class="tab-button" data-tab="stats">System Statistics</button>
+        </nav>
+
+        <!-- Document Upload Module -->
+        <div id="upload" class="tab-content active">
+            <div class="upload-header">
+                <h2>Legal Document Management Center</h2>
+                <p class="module-description">Upload legal documents to build a professional legal knowledge base</p>
+            </div>
+            
+            <div class="upload-container">
+                <div class="upload-area">
+                    <div class="upload-zone" id="uploadZone">
+                        <div class="upload-icon">📄</div>
+                        <h3>Drag files here or click to upload</h3>
+                        <p>Supports PDF and HTML legal documents</p>
+                        <p class="file-info">File size limit: 50MB | Batch upload supported</p>
+                        <input type="file" id="fileInput" accept=".pdf,.html,.htm" multiple style="display: none;">
+                        <button type="button" id="selectFilesBtn" class="btn btn-upload">Select Files</button>
+                    </div>
+                    
+                    <div id="uploadProgress" class="upload-progress" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-text" id="progressText">Uploading...</div>
+                    </div>
+                    
+                    <div id="uploadResult" class="upload-result"></div>
+                </div>
+                
+                <div class="upload-sidebar">
+                    <div class="upload-stats">
+                        <h4>Document Statistics</h4>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Documents:</span>
+                            <span class="stat-value" id="totalDocs">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Uploaded Today:</span>
+                            <span class="stat-value" id="todayUploads">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Processing Status:</span>
+                            <span class="stat-value" id="processingStatus">Ready</span>
+                        </div>
+                    </div>
+                    
+                    <div class="upload-tips">
+                        <h4>Upload Tips</h4>
+                        <ul>
+                            <li>Upload high-quality legal documents</li>
+                            <li>Clear and readable content works better</li>
+                            <li>Multiple file upload supported</li>
+                            <li>Automatic text analysis after upload</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="documents-management">
+                <div class="management-header">
+                    <h3>Document Library Management</h3>
+                    <div class="management-controls">
+                        <button id="refreshDocs" class="btn btn-secondary">
+                            <span class="btn-icon">🔄</span>Refresh
+                        </button>
+                        <button id="buildIndexBtn" class="btn btn-accent">
+                            <span class="btn-icon">🔗</span>Build Index
+                        </button>
+                        <div class="search-box">
+                            <input type="text" id="docSearch" placeholder="Search documents...">
+                            <button class="search-btn">🔍</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="documentsList" class="documents-grid"></div>
+            </div>
+        </div>
+
+        <!-- Knowledge Graph Module -->
+        <div id="knowledge" class="tab-content">
+            <h2>Knowledge Graph</h2>
+            <div class="knowledge-section">
+                <div class="kg-controls">
+                    <button id="buildKG" class="btn btn-primary">Build Knowledge Graph</button>
+                    <div class="query-kg">
+                        <input type="text" id="entityQuery" placeholder="Enter entity name to query...">
+                        <button id="queryKG" class="btn btn-secondary">Query</button>
+                    </div>
+                </div>
+                <div id="kgResult" class="result-section"></div>
+            </div>
+        </div>
+
+        <!-- System Statistics Module -->
+        <div id="stats" class="tab-content">
+            <h2>System Statistics</h2>
+            <div class="stats-section">
+                <button id="getStats" class="btn btn-primary">Get Statistics</button>
+                <div id="statsResult" class="result-section"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 AI Legal Compliance Assistant System | Powered by Alibaba Cloud Bailian</p>
+    </footer>
+
+    <script src="/static/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Legal Compliance Assistant System</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>AI Legal Compliance Assistant System</h1>
+            <p class="subtitle">AI-Powered Legal Compliance Analysis Platform</p>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="tab-button active" data-tab="upload">Document Upload</button>
+            <button class="tab-button" data-tab="qa">Legal Q&A</button>
+            <button class="tab-button" data-tab="compliance">Compliance Analysis</button>
+            <button class="tab-button" data-tab="knowledge">Knowledge Graph</button>
+            <button class="tab-button" data-tab="stats">System Statistics</button>
+        </nav>
+
+        <!-- 文档上传模块 -->
+        <div id="upload" class="tab-content active">
+            <div class="upload-header">
+                <h2>Legal Document Management Center</h2>
+                <p class="module-description">Upload legal documents to build a professional legal knowledge base</p>
+            </div>
+            
+            <div class="upload-container">
+                <div class="upload-area">
+                    <div class="upload-zone" id="uploadZone">
+                        <div class="upload-icon">📄</div>
+                        <h3>Drag files here or click to upload</h3>
+                        <p>Supports PDF and HTML legal documents</p>
+                        <p class="file-info">File size limit: 50MB | Batch upload supported</p>
+                        <input type="file" id="fileInput" accept=".pdf,.html,.htm" multiple style="display: none;">
+                        <button type="button" id="selectFilesBtn" class="btn btn-upload">Select Files</button>
+                    </div>
+                    
+                    <div id="uploadProgress" class="upload-progress" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-text" id="progressText">Uploading...</div>
+                    </div>
+                    
+                    <div id="uploadResult" class="upload-result"></div>
+                </div>
+                
+                <div class="upload-sidebar">
+                    <div class="upload-stats">
+                        <h4>Document Statistics</h4>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Documents:</span>
+                            <span class="stat-value" id="totalDocs">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Uploaded Today:</span>
+                            <span class="stat-value" id="todayUploads">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Processing Status:</span>
+                            <span class="stat-value" id="processingStatus">Ready</span>
+                        </div>
+                    </div>
+                    
+                    <div class="upload-tips">
+                        <h4>Upload Tips</h4>
+                        <ul>
+                            <li>Upload high-quality legal documents</li>
+                            <li>Clear and readable content works better</li>
+                            <li>Multiple file upload supported</li>
+                            <li>Automatic text analysis after upload</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="documents-management">
+                <div class="management-header">
+                    <h3>Document Library Management</h3>
+                    <div class="management-controls">
+                        <button id="refreshDocs" class="btn btn-secondary">
+                            <span class="btn-icon">🔄</span>Refresh
+                        </button>
+                        <button id="buildIndexBtn" class="btn btn-accent">
+                            <span class="btn-icon">🔗</span>Build Index
+                        </button>
+                        <div class="search-box">
+                            <input type="text" id="docSearch" placeholder="Search documents...">
+                            <button class="search-btn">🔍</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="documentsList" class="documents-grid"></div>
+            </div>
+        </div>
+
+        <!-- 法规问答模块 -->
+        <div id="qa" class="tab-content">
+            <div class="qa-header">
+                <h2>Intelligent Legal Q&A Assistant</h2>
+                <p class="module-description">Professional legal Q&A based on RAG technology, supports multi-turn dialogue</p>
+            </div>
+            
+            <div class="chat-container">
+                <div class="chat-sidebar">
+                    <div class="conversation-header">
+                        <h4>Conversation History</h4>
+                        <button id="newConversation" class="btn btn-new-chat">
+                            <span class="btn-icon">💬</span>New Chat
+                        </button>
+                    </div>
+                    
+                    <div id="conversationList" class="conversation-list">
+                        <!-- 对话历史将在这里显示 -->
+                    </div>
+                    
+                    <div class="quick-questions">
+                        <h4>Common Questions</h4>
+                        <div class="quick-question-item" data-question="What is price monopoly behavior?">
+                            💼 Price Monopoly
+                        </div>
+                        <div class="quick-question-item" data-question="How to determine market dominance?">
+                            📊 Market Dominance
+                        </div>
+                        <div class="quick-question-item" data-question="What are the penalties under antitrust law?">
+                            ⚖️ Penalties
+                        </div>
+                        <div class="quick-question-item" data-question="What are the enterprise compliance requirements?">
+                            🏢 Compliance Management
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-main">
+                    <div class="chat-header-info">
+                        <div class="chat-status">
+                            <span class="status-indicator online"></span>
+                            <span>AI Assistant Online</span>
+                        </div>
+                        <div class="chat-actions">
+                            <button id="clearChat" class="btn btn-clear">Clear Chat</button>
+                            <button id="exportChat" class="btn btn-export">Export Chat</button>
+                        </div>
+                    </div>
+                    
+                    <div id="chatMessages" class="chat-messages">
+                        <div class="welcome-message">
+                            <div class="ai-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-text">
+                                    Hello! I'm your legal Q&A assistant. I can help you with:
+                                    <ul>
+                                        <li>Answer legal and regulatory questions</li>
+                                        <li>Analyze specific clause meanings</li>
+                                        <li>Provide compliance suggestions</li>
+                                        <li>Find relevant legal basis</li>
+                                    </ul>
+                                    Feel free to ask me anything!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                        <div class="ai-avatar">🤖</div>
+                        <div class="typing-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input-container">
+                        <div class="input-suggestions" id="inputSuggestions"></div>
+                        <div class="chat-input-area">
+                            <div class="input-wrapper">
+                                <textarea id="questionInput" placeholder="Please enter your legal question..." rows="1"></textarea>
+                                <div class="input-actions">
+                                    <button id="attachBtn" class="action-btn" title="Attachment">📎</button>
+                                    <button id="voiceBtn" class="action-btn" title="Voice">🎤</button>
+                                    <button id="sendBtn" class="btn btn-send">
+                                        <span class="btn-icon">📤</span>Send
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="input-footer">
+                                <div class="input-options">
+                                    <label>
+                                        <input type="checkbox" id="contextMode" checked>
+                                        Keep Context
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" id="detailedMode">
+                                        Detailed Answer
+                                    </label>
+                                </div>
+                                <div class="input-hint">
+                                    Press Enter to send, Shift + Enter for new line
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 合规分析模块 -->
+        <div id="compliance" class="tab-content">
+            <h2>Compliance Analysis</h2>
+            <div class="compliance-section">
+                <div class="business-input">
+                    <h3>Business Data Input</h3>
+                    <div class="form-group">
+                        <label>Business Type:</label>
+                        <input type="text" id="businessType" placeholder="e.g., Pricing, Market Competition, etc.">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="businessDescription" rows="4" placeholder="Please describe your business behavior or scenario in detail..."></textarea>
+                    </div>
+                    <button id="analyzeCompliance" class="btn btn-primary">Analyze Compliance</button>
+                </div>
+                <div id="complianceResult" class="result-section"></div>
+            </div>
+        </div>
+
+        <!-- 知识图谱模块 -->
+        <div id="knowledge" class="tab-content">
+            <h2>Knowledge Graph</h2>
+            <div class="knowledge-section">
+                <div class="kg-controls">
+                    <button id="buildKG" class="btn btn-primary">Build Knowledge Graph</button>
+                    <div class="query-kg">
+                        <input type="text" id="entityQuery" placeholder="Enter entity name to query...">
+                        <button id="queryKG" class="btn btn-secondary">Query</button>
+                    </div>
+                </div>
+                <div id="kgResult" class="result-section"></div>
+            </div>
+        </div>
+
+        <!-- 系统统计模块 -->
+        <div id="stats" class="tab-content">
+            <h2>System Statistics</h2>
+            <div class="stats-section">
+                <button id="getStats" class="btn btn-primary">Get Statistics</button>
+                <div id="statsResult" class="result-section"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 AI Legal Compliance Assistant System | Powered by Alibaba Cloud Bailian</p>
+    </footer>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

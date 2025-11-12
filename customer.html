@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Legal Compliance Assistant System</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>AI Legal Compliance Assistant System</h1>
+            <p class="subtitle">Professional Legal Consultation & Compliance Analysis</p>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="tab-button active" data-tab="qa">Legal Q&A</button>
+            <button class="tab-button" data-tab="compliance">Compliance Analysis</button>
+        </nav>
+
+        <!-- Legal Q&A Module -->
+        <div id="qa" class="tab-content active">
+            <div class="qa-header">
+                <h2>Intelligent Legal Q&A Assistant</h2>
+                <p class="module-description">Get instant answers to your legal questions based on our comprehensive regulation database</p>
+            </div>
+            
+            <div class="chat-container">
+                <div class="chat-sidebar">
+                    <div class="conversation-header">
+                        <h4>Conversation History</h4>
+                        <button id="newConversation" class="btn btn-new-chat">
+                            <span class="btn-icon">💬</span>New Chat
+                        </button>
+                    </div>
+                    
+                    <div id="conversationList" class="conversation-list">
+                        <!-- Conversation history will be displayed here -->
+                    </div>
+                    
+                    <div class="quick-questions">
+                        <h4>Common Questions</h4>
+                        <div class="quick-question-item" data-question="What is price monopoly behavior?">
+                            💼 Price Monopoly
+                        </div>
+                        <div class="quick-question-item" data-question="How to determine market dominance?">
+                            📊 Market Dominance
+                        </div>
+                        <div class="quick-question-item" data-question="What are the penalties under antitrust law?">
+                            ⚖️ Penalties
+                        </div>
+                        <div class="quick-question-item" data-question="What are the enterprise compliance requirements?">
+                            🏢 Compliance Management
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-main">
+                    <div class="chat-header-info">
+                        <div class="chat-status">
+                            <span class="status-indicator online"></span>
+                            <span>AI Assistant Online</span>
+                        </div>
+                        <div class="chat-actions">
+                            <button id="clearChat" class="btn btn-clear">Clear Chat</button>
+                            <button id="exportChat" class="btn btn-export">Export Chat</button>
+                        </div>
+                    </div>
+                    
+                    <div id="chatMessages" class="chat-messages">
+                        <div class="welcome-message">
+                            <div class="ai-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-text">
+                                    Hello! I'm your legal Q&A assistant. I can help you with:
+                                    <ul>
+                                        <li>Answer legal and regulatory questions</li>
+                                        <li>Analyze specific clause meanings</li>
+                                        <li>Provide compliance suggestions</li>
+                                        <li>Find relevant legal basis</li>
+                                    </ul>
+                                    Feel free to ask me anything!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                        <div class="ai-avatar">🤖</div>
+                        <div class="typing-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input-container">
+                        <div class="input-suggestions" id="inputSuggestions"></div>
+                        <div class="chat-input-area">
+                            <div class="input-wrapper">
+                                <textarea id="questionInput" placeholder="Please enter your legal question..." rows="1"></textarea>
+                                <div class="input-actions">
+                                    <button id="sendBtn" class="btn btn-send">
+                                        <span class="btn-icon">📤</span>Send
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="input-footer">
+                                <div class="input-options">
+                                    <label>
+                                        <input type="checkbox" id="contextMode" checked>
+                                        Keep Context
+                                    </label>
+                                </div>
+                                <div class="input-hint">
+                                    Press Enter to send, Shift + Enter for new line
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compliance Analysis Module -->
+        <div id="compliance" class="tab-content">
+            <h2>Compliance Analysis</h2>
+            <div class="compliance-section">
+                <div class="business-input">
+                    <h3>Business Data Input</h3>
+                    <div class="form-group">
+                        <label>Business Description: <span style="color: red;">*</span></label>
+                        <textarea id="businessDescription" rows="4" placeholder="Please describe your business behavior or scenario in detail..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Reference Document (Optional):</label>
+                        <div class="file-upload-area">
+                            <input type="file" id="complianceFileInput" accept=".pdf,.html,.htm,.txt,.doc,.docx" style="display: none;">
+                            <div class="file-upload-box" id="fileUploadBox">
+                                <span class="upload-icon">📎</span>
+                                <span class="upload-text">Click to upload or drag file here</span>
+                                <span class="file-info" style="display: none;"></span>
+                            </div>
+                            <small class="help-text">Upload a document for reference during this analysis (PDF, HTML, TXT, DOC supported)</small>
+                        </div>
+                    </div>
+                    <button id="analyzeCompliance" class="btn btn-primary">Analyze Compliance</button>
+                    <div id="complianceProgress" class="upload-progress" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <div class="progress-text">Processing...</div>
+                    </div>
+                </div>
+                <div id="complianceResult" class="result-section"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 AI Legal Compliance Assistant System | Powered by Alibaba Cloud Bailian</p>
+    </footer>
+
+    <script src="/static/customer.js"></script>
+</body>
+</html>
